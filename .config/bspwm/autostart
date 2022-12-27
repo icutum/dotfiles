@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Compositor
+picom &
+
+# Wallpaper
+nitrogen --restore &
+
+# Status bar
+$HOME/.config/polybar/launch.sh

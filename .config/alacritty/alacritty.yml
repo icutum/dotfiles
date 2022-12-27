@@ -1,0 +1,62 @@
+window:
+  padding:
+    x: 5
+    y: 5
+  class:
+    instance: Alacritty
+    general: Alacritty
+  opacity: 1
+
+scrolling:
+  history: 10000
+  multiplier: 3
+
+
+font:
+  normal:
+    family: JetBrains Mono Nerd Font
+    style:  Medium
+  bold:
+    family: JetBrains Mono Nerd Font
+    style:  Bold
+  italic:
+    family: JetBrains Mono Nerd Font
+    style:  MediumItalic
+  bold_italic:
+    family: JetBrains Mono Nerd Font
+    style: BoldItalic
+  size: 8
+draw_bold_text_with_bright_colors: true
+
+colors:
+  primary:
+    background: "#0D1117"
+    foreground: "#C9D1D9"
+  normal:
+    black: "#3f4f5b"
+    red: "#ca3e5a"
+    green: "#81a559"
+    yellow: "#ebb062"
+    blue: "#4496cd"
+    magenta: "#b35d8d"
+    cyan: "#42abab"
+    white: "#96a8b5"
+  bright:
+    black: "#556572"
+    red: "#c45871"
+    green: "#8aaa70"
+    yellow: "#deb377"
+    blue: "#599ecd"
+    magenta: "#b2709a"
+    cyan: "#57afb2"
+    white: "#acbecc"
+
+selection:
+  save_to_clipboard: false
+
+shell:
+  program: /usr/bin/bash
+
+key_bindings:
+  - { key: Return, mods: Super|Shift, action: SpawnNewInstance }
+
