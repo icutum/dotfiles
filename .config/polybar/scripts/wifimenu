@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
 # Starts a scan of available broadcasting SSIDs
-nmcli dev wifi rescan
-notify-send "Getting list of available Wi-Fi networks..."
+# nmcli dev wifi rescan
+dunstify -i wifi "Escaneando las redes Wi-Fi disponibles..."
 wifi_list=$(nmcli --fields "SECURITY,SSID" device wifi list | sed 1d | sed 's/  */ /g' | sed -E "s/WPA*.?\S/ /g" | sed "s/^--/ /g" | sed "s/  //g" | sed "/--/d")
 
 # Gives a list of known connections so we can parse it later
 connected=$(nmcli con show --active)
 
 if [[ "$connected" ]]; then
-	toggle="睊  Disable Wi-Fi"
+	toggle="睊  Desactivar Wi-Fi"
 else
-	toggle="直  Enable Wi-Fi"
+	toggle="直  Activar Wi-Fi"
 fi
 
 chosen_network=$(echo -e "$toggle\n$wifi_list" | uniq -u | rofi -dmenu -i -selected-row 1 -p "Wi-Fi SSID: " )
@@ -20,21 +20,23 @@ chosen_id=$(echo "${chosen_network:3}" | xargs)
 # Parses the list of preconfigured connections to see if it already contains the chosen SSID. This speeds up the connection process
 if [ "$chosen_network" = "" ]; then
 	exit
-elif [ "$chosen_network" = "直  Enable Wi-Fi" ]; then
+elif [ "$chosen_network" = "直  Activar Wi-Fi" ]; then
 	nmcli radio wifi on
-elif [ "$chosen_network" = "睊  Disable Wi-Fi" ]; then
+	dunstify -i wifi-check "Wi-Fi Activado"
+elif [ "$chosen_network" = "睊  Desactivar Wi-Fi" ]; then
 	nmcli radio wifi off
+	dunstify -i wifi-off "Wi-Fi Desactivado"
 else
 	# Message to show when connection is activated successfully
-	success_message="You are now connected to the Wi-Fi network \"$chosen_id\"."
+	success_message="Estás conectado a la red Wi-Fi \"$chosen_id\"."
 	# Get known connections
 	saved_connections=$(nmcli -g NAME connection)
 	if [[ $(echo "$saved_connections" | grep -w "$chosen_id") = "$chosen_id" ]]; then
-		nmcli connection up id "$chosen_id" | grep "successfully" && notify-send "Connection Established" "$success_message"
+		nmcli connection up id "$chosen_id" | grep "successfully" && notify-send -i wifi "Conexión establecida" "$success_message"
 	else
 		if [[ "$chosen_network" =~ "" ]]; then
 			wifi_password=$(rofi -dmenu -p "Password: " )
 		fi
-		nmcli device wifi connect "$chosen_id" password "$wifi_password" | grep "successfully" && notify-send "Connection Established" "$success_message"
+		nmcli device wifi connect "$chosen_id" password "$wifi_password" | grep "successfully" && notify-send -i "Conexión establecida" "$success_message"
 	fi
 fi
