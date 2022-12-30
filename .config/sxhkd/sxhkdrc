@@ -125,10 +125,10 @@ super + {Left,Down,Up,Right}
 #
 
 XF86MonBrightnessUp
-	brillo -u 150000 -A 5 -q 
+	changebrightness up
 
 XF86MonBrightnessDown
-	brillo -u 150000 -U 5 -q
+	changebrightness down
 
 #
 # media keys
@@ -148,17 +148,29 @@ XF86AudioPlay
 #
 
 XF86AudioRaiseVolume
-	amixer set Master 5%+
+	changevolume up
 
 XF86AudioLowerVolume
-	amixer set Master 5%-
+	changevolume down
 
 XF86AudioMute
-	amixer set Master {mute, unmute}
+	changevolume mute
 
 #
 # lockscreen
 #
 
-super + space
+XF86Lock
 	lxdm -c USER_SWITCH
+
+#
+# screenshot key
+#
+Print
+	flameshot gui
+
+#
+# powermenu
+#
+alt + F4
+	powermenu
