@@ -312,7 +312,7 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#0D1117"
+    background = "#121212"
     foreground = "#C9D1D9"
     frame_color = "#C9D1D9"
     timeout = 5
@@ -320,7 +320,7 @@
     default_icon = bell
 
 [urgency_normal]
-    background = "#0D1117"
+    background = "#121212"
     foreground = "#C9D1D9"
     frame_color = "#C9D1D9"
     timeout = 5
@@ -328,7 +328,7 @@
     default_icon = bell
 
 [urgency_critical]
-    background = "#0D1117"
+    background = "#121212"
     foreground = "#C9D1D9"
     frame_color = "#F47067"
     timeout = 5

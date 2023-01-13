@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Starts a scan of available broadcasting SSIDs
-# nmcli dev wifi rescan
+nmcli dev wifi rescan
 dunstify -i wifi "Escaneando las redes Wi-Fi disponibles..."
 wifi_list=$(nmcli --fields "SECURITY,SSID" device wifi list | sed 1d | sed 's/  */ /g' | sed -E "s/WPA*.?\S/ /g" | sed "s/^--/ /g" | sed "s/  //g" | sed "/--/d")
 

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Natural scrolling
+xinput set-prop 12 "libinput Natural Scrolling Enabled" 1
+
 # Compositor
 picom &
 
